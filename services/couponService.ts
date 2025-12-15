@@ -14,6 +14,7 @@ class CouponService {
       discountValue: 10,
       startDate: new Date().toISOString(),
       endDate: new Date(Date.now() + 86400000 * 30).toISOString(), // +30 days
+      isActive: true,
       eligibility: {
         minCartValue: 50,
         firstOrderOnly: true,
@@ -28,6 +29,7 @@ class CouponService {
       maxDiscountAmount: 50,
       startDate: new Date().toISOString(),
       endDate: new Date(Date.now() + 86400000 * 7).toISOString(),
+      isActive: true,
       eligibility: {
         applicableCategories: ['electronics'],
       },
@@ -40,6 +42,7 @@ class CouponService {
       discountValue: 50,
       startDate: new Date().toISOString(),
       endDate: new Date(Date.now() + 86400000 * 60).toISOString(),
+      isActive: true,
       eligibility: {
         allowedUserTiers: ['Gold', 'Platinum'],
         minCartValue: 200,
@@ -51,7 +54,22 @@ class CouponService {
     if (this.coupons.has(coupon.code)) {
       throw new Error(`Coupon with code ${coupon.code} already exists.`);
     }
+    // Default to active if not specified
+    if (coupon.isActive === undefined) {
+        coupon.isActive = true;
+    }
     this.coupons.set(coupon.code, coupon);
+  }
+
+  updateCoupon(code: string, updatedCoupon: Coupon): void {
+    if (!this.coupons.has(code)) {
+        throw new Error(`Coupon with code ${code} not found.`);
+    }
+    this.coupons.set(code, updatedCoupon);
+  }
+
+  deleteCoupon(code: string): void {
+      this.coupons.delete(code);
   }
 
   getAllCoupons(): Coupon[] {
@@ -75,6 +93,9 @@ class CouponService {
     const now = new Date();
 
     for (const coupon of this.coupons.values()) {
+      // 0. Active Check
+      if (coupon.isActive === false) continue;
+
       // 1. Date Validation
       const start = new Date(coupon.startDate);
       const end = new Date(coupon.endDate);

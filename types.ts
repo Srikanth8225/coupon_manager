@@ -25,6 +25,7 @@ export interface Coupon {
   endDate: string; // ISO Date
   usageLimitPerUser?: number;
   eligibility?: Eligibility;
+  isActive?: boolean; // Controls whether the coupon is currently usable
 }
 
 export interface CartItem {
