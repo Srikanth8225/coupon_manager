@@ -1,0 +1,5 @@
+{
+  "name": "Coupon Manager",
+  "description": "A comprehensive coupon management system with eligibility rules and a simulator to find the best coupon for a given cart.",
+  "requestFramePermissions": []
+}
