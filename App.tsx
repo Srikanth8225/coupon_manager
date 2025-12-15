@@ -40,7 +40,6 @@ export default function App() {
                </div>
                <div>
                   <div className="font-bold text-lg tracking-wider">Coupon Manager</div>
-                  <div className="text-[10px] text-gray-300 uppercase tracking-widest">Backend Service Final</div>
                </div>
             </div>
             
@@ -80,8 +79,7 @@ export default function App() {
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 py-4 mt-auto">
         <div className="max-w-6xl mx-auto px-4 text-center">
-           <p className="text-sm text-gray-600">Student Project Submission • Spring 2025</p>
-           <p className="text-xs text-gray-400 mt-1 font-mono">Node.js / Express Logic Simulation</p>
+           <p className="text-sm text-gray-600">&copy; {new Date().getFullYear()} Coupon Management System</p>
         </div>
       </footer>
     </div>
